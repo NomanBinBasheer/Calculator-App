@@ -70,7 +70,7 @@ button{
    height: 3.1rem;
    border-radius: 50%;
    margin: 5px;
-   font-size: 2rem;
+   font-size: 2.2rem;
    font-weight: bold;
    cursor: pointer;
    transition: all 0.2s;
@@ -87,7 +87,7 @@ button:active{
 }
 
 .equals{   
-  width: 89%;
+  width: 91%;
   border-radius: 30px;
 }
 .AC{

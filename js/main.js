@@ -21,10 +21,10 @@ keys.addEventListener('click', buttonPressed =>{
      const {target} = buttonPressed
      const {value}  = target
      if (!target.matches('button')) {
-          return
+          return;
      }
      else{
-          parseInput(value)
+          calculator.parseInput(value)
      }
      
 })
@@ -35,35 +35,67 @@ const calculator = {
 
 
      parseInput(value){
-          if (this.displayText == '0'){
-               this.displayText = ''
-          }
+         
 
      //    Have any of the "special buttons" been clicked?
 
       switch (value) {
           case '=' :
-          //   calculate the answer
+               this.calculateAnswer(this.displayText)
                break;
           case 'AC' : 
-          //  clear screen and all values
+               this.allClear()
                break;
           case '.' :
            if (this.displayText == '0'){
-               // pass '0.' to the text
+               this.addText('0.')
+           }
+           else if (this.displayText == '0.' || this.displayText == '1.' || this.displayText == '2.' || this.displayText == '3.' || this.displayText == '4.' || this.displayText == '5.' || this.displayText == '6.' || this.displayText == '7.' || this.displayText == '8.' || this.displayText == '9.'){
+               return;
            }
            else{
-               // add value (.) to the text string
+               this.addText(value)
            }
            break;
 
            default: 
-          //  add value to the text string
+           this.addText(value)
+           break;
       }
       
-      addText(value){
-          
-      }
+      
 
-     }
+     },
+
+     addText(value){
+          if (this.displayText == '0'){
+               this.displayText = ''
+          }
+          else if(this.prevTotal !== null){
+              this.displayText = this.prevTotal
+              this.prevTotal = null
+          }
+          if(isNaN(+(value)) && isNaN(+(this.displayText))){
+               if(isNaN(this.displayText.slice(-1))){
+                    return;
+               }
+          }
+          this.displayText += value
+          this.outputText(this.displayText)
+     },
+
+     outputText(text){
+        document.querySelector('.calculatorScreen').value = text
+     },
+     calculateAnswer(equation){
+          let result = Function('return ' + equation)()
+          this.outputText(result)
+          this.prevTotal = result
+
+     },
+     allClear(){
+          this.displayText = '0'
+          this.prevTotal = null
+          this.outputText(this.displayText)
+     },
 }
