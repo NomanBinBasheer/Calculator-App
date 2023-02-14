@@ -23,7 +23,10 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: aliceblue;
 }
+
+
 
 /******************************************
 /* LAYOUT
@@ -32,6 +35,7 @@ h1 {
   display: flex;
   justify-content: center;
   font-size: 3rem;
+  background-color: white;
 }
 .calculator {
   width: 320px;
